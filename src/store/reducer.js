@@ -1,23 +1,53 @@
-const initialState = { counter: 0 };
+const initialState = {
+  counter: 0,
+  results: []
+};
 
 const actions = {
-  INCREMENT: (counter) => {
-    return { counter: counter + 1 };
+  INCREMENT: (state) => {
+    return {
+      ...state,
+      counter: state.counter + 1
+    };
   },
-  DECREMENT: (counter) => {
-    return { counter: counter - 1 };
+  DECREMENT: (state) => {
+    return {
+      ...state,
+      counter: state.counter - 1
+    };
   },
-  ADD: (counter, value) => {
-    return { counter: counter + value };
+  ADD: (state, value) => {
+    return {
+      ...state,
+      counter: state.counter + value
+    };
   },
-  SUBTRACT: (counter, value) => {
-    return { counter: counter - value };
+  SUBTRACT: (state, value) => {
+    return {
+      ...state,
+      counter: state.counter - value
+    };
+  },
+  STORE_RESULT: (state) => {
+    const newResults = [ ...state.results, state.counter ]
+    return {
+      ...state,
+      results: newResults
+    };
+  },
+  DELETE_RESULT: (state, index) => {
+    const newResults = [ ...state.results ];
+    newResults.splice(index, 1);
+    return {
+      ...state,
+      results: newResults
+    };
   }
 };
 
 const reducer = (state = initialState, action) => {
   return actions[action.type] ?
-    actions[action.type](state.counter, action.value) :
+    actions[action.type](state, action.value) :
     state
 }
 
