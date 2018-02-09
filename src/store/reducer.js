@@ -1,27 +1,24 @@
 const initialState = { counter: 0 };
 
+const actions = {
+  INCREMENT: (counter) => {
+    return { counter: counter + 1 };
+  },
+  DECREMENT: (counter) => {
+    return { counter: counter - 1 };
+  },
+  ADD: (counter, value) => {
+    return { counter: counter + value };
+  },
+  SUBTRACT: (counter, value) => {
+    return { counter: counter - value };
+  }
+};
+
 const reducer = (state = initialState, action) => {
-  if ( action.type === 'INCREMENT' ) {
-    return {
-      counter: state.counter + 1
-    };
-  }
-  if ( action.type === 'DECREMENT' ) {
-    return {
-      counter: state.counter - 1
-    };
-  }
-  if ( action.type === 'ADD' ) {
-    return {
-      counter: state.counter + action.value
-    };
-  }
-  if ( action.type === 'SUBTRACT' ) {
-    return {
-      counter: state.counter - action.value
-    };
-  }
-  return state;
+  return actions[action.type] ?
+    actions[action.type](state.counter, action.value) :
+    state
 }
 
 export default reducer;
