@@ -1,6 +1,5 @@
 const initialState = {
-  counter: 0,
-  results: []
+  counter: 0
 };
 
 const actions = {
@@ -26,23 +25,6 @@ const actions = {
     return {
       ...state,
       counter: state.counter - value
-    };
-  },
-  STORE_RESULT: (state) => {
-    // const newResults = [ ...state.results, state.counter ]
-    const newResults = state.results.concat(state.counter);
-    return {
-      ...state,
-      results: newResults
-    };
-  },
-  DELETE_RESULT: (state, index) => {
-    // const newResults = [ ...state.results ];
-    // newResults.splice(index, 1);
-    const newResults = state.results.filter( (result, i) => i !== index );
-    return {
-      ...state,
-      results: newResults
     };
   }
 };
